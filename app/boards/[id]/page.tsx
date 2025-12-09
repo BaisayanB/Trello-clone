@@ -58,6 +58,7 @@ function DroppableColumn({
   onEditColumn: (column: ColumnWithTasks) => void;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: column.id });
+  
   return (
     <div
       ref={setNodeRef}
@@ -551,7 +552,6 @@ export default function BoardPage() {
       }
 
       // Filter by due date
-
       if (filters.dueDate && task.due_date) {
         const taskDate = new Date(task.due_date).toDateString();
         const filterDate = new Date(filters.dueDate).toDateString();
@@ -681,6 +681,8 @@ export default function BoardPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Assignee Filter required here */}
 
               <div className="space-y-2">
                 <Label>Due Date</Label>

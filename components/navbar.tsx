@@ -1,12 +1,12 @@
 "use client";
 
-import { SignInButton, SignUpButton, useUser, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 import {
-  Trello,
-  ArrowRight,
   ArrowLeft,
-  MoreHorizontal,
+  ArrowRight,
   Filter,
+  MoreHorizontal,
+  Trello,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -16,6 +16,7 @@ import { Badge } from "./ui/badge";
 interface Props {
   boardTitle?: string;
   onEditBoard?: () => void;
+
   onFilterClick?: () => void;
   filterCount?: number;
 }
@@ -39,7 +40,7 @@ export default function Navbar({
           <div className="flex items-center space-x-2">
             <Trello className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
             <span className="text-xl sm:text-2xl font-bold text-gray-900">
-              Trello
+              Trello Clone
             </span>
           </div>
 
@@ -143,13 +144,13 @@ export default function Navbar({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="sm:text-sm text-xs"
+                  className="text-xs sm:text-sm"
                 >
                   Sign In
                 </Button>
               </SignInButton>
               <SignUpButton>
-                <Button size="sm" className="sm:text-sm text-xs">
+                <Button size="sm" className="text-xs sm:text-sm">
                   Sign Up
                 </Button>
               </SignUpButton>

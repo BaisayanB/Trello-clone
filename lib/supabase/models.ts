@@ -29,5 +29,4 @@ export interface Task {
   priority: "low" | "medium" | "high";
   sort_order: number;
   created_at: string;
-  updated_at: string;
 }

@@ -2,7 +2,6 @@ import { Board, Column, Task } from "./supabase/models";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const boardService = {
-
   async getBoard(supabase: SupabaseClient, boardId: string): Promise<Board> {
     const { data, error } = await supabase
       .from("boards")
@@ -60,7 +59,6 @@ export const boardService = {
 };
 
 export const columnService = {
-
   async getColumns(
     supabase: SupabaseClient,
     boardId: string
@@ -109,7 +107,6 @@ export const columnService = {
 };
 
 export const taskService = {
-
   async getTasksByBoard(
     supabase: SupabaseClient,
     boardId: string
@@ -165,7 +162,6 @@ export const taskService = {
 };
 
 export const boardDataService = {
-  
   async getBoardWithColumns(supabase: SupabaseClient, boardId: string) {
     const [board, columns] = await Promise.all([
       boardService.getBoard(supabase, boardId),
