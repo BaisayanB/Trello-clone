@@ -17,38 +17,42 @@ import {
   ArrowRight,
   Medal,
 } from "lucide-react";
-
+import { Logo } from "@/components/logo";
 import Navbar from "@/components/navbar";
 
 export default function HomePage() {
+
   const { isSignedIn, user } = useUser();
 
   const features = [
     {
       icon: CheckSquare,
-      title: "Task Management",
-      description: "Organize your tasks with intuitive drag-and-drop boards.",
+      title: "Visually Interactive Boards",
+      description:
+        "Create unlimited boards. Structure your workflow the way you work - simple, flexible, and designed for clarity.",
     },
     {
       icon: Users,
-      title: "Team Collaboration",
-      description: "Work together with your team in real-time.",
+      title: "Smart Search, Filters & Analytics",
+      description:
+        "Find tasks instantly using search and advanced filtering. View analytics to understand progress & stay productive.",
     },
     {
       icon: Zap,
-      title: "Productivity Boost",
-      description: "Stay focused and get more done with our efficient tools.",
+      title: "Drag-and-Drop with Custom Columns",
+      description:
+        "Move tasks between stages, reorder them with ease, rename them and create as many workflow steps needed.",
     },
     {
       icon: Shield,
-      title: "Secure & Reliable",
+      title: "Secure & Reliable with Realtime Updates",
       description:
-        "Enterprise -grade security to protect your data with Clerk authentication.",
+        "Enterprise-grade security to protect your data with instantaneous realtime-sync to keep you updated.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-radial from-white to-purple-50">
+    <div className="min-h-screen bg-radial from-white to-purple-100">
       <Navbar />
 
       {/* Hero Section */}
@@ -98,7 +102,7 @@ export default function HomePage() {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-purple-500 mb-4">
             Everything you need to stay organized
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -106,15 +110,15 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 mx-auto max-w-4xl gap-8">
           {features.map((feature, index) => (
             <Card
               key={index}
               className="border-0 shadow-lg hover:shadow-xl transition-shadow"
             >
               <CardHeader className="text-center">
-                <div className="mx-auto w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-blue-600" />
+                <div className="mx-auto w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                  <feature.icon className="h-6 w-6 text-purple-600" />
                 </div>
                 <CardTitle className="text-lg">{feature.title}</CardTitle>
               </CardHeader>
@@ -155,11 +159,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              {/* <SquareKanban className="h-6 w-6 text-blue-400" /> */}
-              <span className="text-xl font-bold">Trello</span>
+              <Logo className="h-6 w-6 text-blue-400" />
+              <span className="text-xl font-bold">TaskFlow</span>
             </div>
             <div className="flex items-center space-x-6 text-sm text-gray-400">
-              <span>© 2025 Trello. All rights reserved.</span>
+              <span>© 2025 TaskFlow. All rights reserved.</span>
               <span>Built with ❤️</span>
             </div>
           </div>

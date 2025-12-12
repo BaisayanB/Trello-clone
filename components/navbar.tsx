@@ -119,7 +119,7 @@ export default function Navbar({
   }
 
   return (
-    <header className="border-b bg-white/70 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-purple-200 bg-white/70 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-8 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Logo className="w-6 h-6 sm:h-8 sm:w-8 text-purple-500" />
