@@ -7,11 +7,13 @@ import {
   Filter,
   MoreHorizontal,
   Trello,
+  SquareKanban,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Badge } from "./ui/badge";
+import { Logo } from "./logo";
 
 interface Props {
   boardTitle?: string;
@@ -38,9 +40,9 @@ export default function Navbar({
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Trello className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+            <SquareKanban className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
             <span className="text-xl sm:text-2xl font-bold text-gray-900">
-              Trello Clone
+              TaskFlow
             </span>
           </div>
 
@@ -68,7 +70,7 @@ export default function Navbar({
               </Link>
               <div className="h-4 sm:h-6 w-px bg-gray-300 hidden sm:block" />
               <div className="flex items-center space-x-1 sm:space-x-2 min-w-0">
-                <Trello className="text-blue-600" />
+                <SquareKanban className="text-blue-600" />
                 <div className="items-center space-x-1 sm:space-x-2 min-w-0">
                   <span className="text-lg font-bold text-gray-900 truncate">
                     {boardTitle}
@@ -117,12 +119,12 @@ export default function Navbar({
   }
 
   return (
-    <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
+    <header className="border-b bg-white/70 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-8 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Trello className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+          <Logo className="w-6 h-6 sm:h-8 sm:w-8 text-purple-500" />
           <span className="text-xl sm:text-2xl font-bold text-gray-900">
-            Trello
+            Task<span className="text-purple-500">Flow</span>
           </span>
         </div>
 
@@ -139,18 +141,14 @@ export default function Navbar({
               </Link>
             </div>
           ) : (
-            <div>
+            <div className="space-x-1">
               <SignInButton>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-xs sm:text-sm"
-                >
+                <Button variant="ghost" className="text-xs sm:text-sm">
                   Sign In
                 </Button>
               </SignInButton>
               <SignUpButton>
-                <Button size="sm" className="text-xs sm:text-sm">
+                <Button className="text-xs sm:text-sm bg-purple-500 hover:bg-purple-600">
                   Sign Up
                 </Button>
               </SignUpButton>

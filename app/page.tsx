@@ -15,12 +15,10 @@ import {
   Zap,
   Shield,
   ArrowRight,
-  Trello,
+  Medal,
 } from "lucide-react";
 
 import Navbar from "@/components/navbar";
-import { Description } from "@radix-ui/react-dialog";
-import { Sign } from "crypto";
 
 export default function HomePage() {
   const { isSignedIn, user } = useUser();
@@ -50,40 +48,55 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-200 via-white to-purple-200">
+    <div className="min-h-screen bg-radial from-white to-purple-50">
       <Navbar />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Organize work and life,{" "}
-            <span className="text-blue-600">finally.</span>
+        <div className="max-w-5xl mx-auto">
+          <div className="mx-auto mb-4 w-fit flex items-center border border-purple-700 shadow-sm p-4 bg-purple-100 text-purple-700 rounded-full font-bold uppercase">
+            <Medal className="h-6 w-6 mr-2" />
+            No 1 Task Management App
+          </div>
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            Modern Way to Stay{" "}
+            <span className="text-purple-500">Organized</span> - Task
+            <span className="text-purple-500">Flow</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Trello helps teams move forward. Collaborate, manage projects, and
-            reach new productivity peaks. From high rises to the home office,
-            the way your team works is unique—accomplish it all with Trello.
+          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+            Plan projects, organize tasks, track progress, and streamline your
+            workflow with fast, flexible Kanban system. From daily planning to
+            long-term goals, TaskFlow adapts to how you work, helps stay
+            organized, focused, and ahead.
           </p>
 
           {!isSignedIn && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#features">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-lg border-2 text-semibold px-8 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                >
+                  Explore Features
+                </Button>
+              </a>
               <SignUpButton>
-                <Button size="lg" className="text-lg px-8">
+                <Button
+                  size="lg"
+                  className="text-lg px-8 bg-purple-500 hover:bg-purple-600"
+                >
                   Start for free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </SignUpButton>
-              <Button variant="outline" size="lg" className="text-lg px-8">
-                Watch Demo
-              </Button>
             </div>
           )}
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section id="features" className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Everything you need to stay organized
@@ -116,7 +129,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA section */}
-      <section className="bg-blue-600 py-20">
+      <section className=" py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to get started?
@@ -138,11 +151,11 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="text-white py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Trello className="h-6 w-6 text-blue-400" />
+              {/* <SquareKanban className="h-6 w-6 text-blue-400" /> */}
               <span className="text-xl font-bold">Trello</span>
             </div>
             <div className="flex items-center space-x-6 text-sm text-gray-400">
