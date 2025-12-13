@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Filter,
   MoreHorizontal,
-  Trello,
   SquareKanban,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -37,16 +36,16 @@ export default function Navbar({
 
   if (isDashboardPage) {
     return (
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
+      <header className="border-b border-purple-200 bg-white/70 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <SquareKanban className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+            <Logo className="w-6 h-6 sm:h-8 sm:w-8 text-purple-500" />
             <span className="text-xl sm:text-2xl font-bold text-gray-900">
-              TaskFlow
+              Task<span className="text-purple-500">Flow</span>
             </span>
           </div>
 
-          <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 rounded-full border-2 border-purple-500">
             <UserButton />
           </div>
         </div>
@@ -120,7 +119,7 @@ export default function Navbar({
 
   return (
     <header className="border-b border-purple-200 bg-white/70 backdrop-blur-sm sticky top-0 z-50">
-      <div className="container mx-auto px-8 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Logo className="w-6 h-6 sm:h-8 sm:w-8 text-purple-500" />
           <span className="text-xl sm:text-2xl font-bold text-gray-900">
@@ -131,11 +130,14 @@ export default function Navbar({
         <div className="flex items-center space-x-2 sm:space-x-4">
           {isSignedIn ? (
             <div className="flex flex-col sm:flex-row items-end sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
-              <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">
+              <span className="text-xs sm:text-sm text-purple-700 hidden sm:block">
                 Welcome, {user.firstName ?? user.emailAddresses[0].emailAddress}
               </span>
               <Link href="/dashboard">
-                <Button size="sm" className="text-xs sm:text-sm">
+                <Button
+                  size="sm"
+                  className="text-xs sm:text-sm bg-purple-500 hover:bg-purple-600"
+                >
                   Go to Dashboard <ArrowRight />
                 </Button>
               </Link>
@@ -143,7 +145,10 @@ export default function Navbar({
           ) : (
             <div className="space-x-1">
               <SignInButton>
-                <Button variant="ghost" className="text-xs sm:text-sm">
+                <Button
+                  variant="outline"
+                  className="text-xs sm:text-sm border-2 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                >
                   Sign In
                 </Button>
               </SignInButton>

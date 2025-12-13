@@ -75,12 +75,12 @@ export default function HomePage() {
           </p>
 
           {!isSignedIn && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-row gap-4 justify-center">
               <a href="#features">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="text-lg border-2 text-semibold px-8 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                  className="text-lg border-2 text-semibold border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
                 >
                   Explore Features
                 </Button>
@@ -155,16 +155,18 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="text-white py-4">
-        <div className="container mx-auto px-4">
+      <footer className="py-3 border-t border-purple-200 bg-white/70">
+        <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Logo className="h-6 w-6 text-blue-400" />
-              <span className="text-xl font-bold">TaskFlow</span>
+              <Logo className="h-6 w-6 text-purple-500" />
+              <span className="text-xl font-bold">
+                Task<span className="text-purple-500">Flow</span>
+              </span>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-gray-400">
+            <div className="flex items-center space-x-6 text-sm text-purple-700">
               <span>© 2025 TaskFlow. All rights reserved.</span>
-              <span>Built with ❤️</span>
+              <span>Built with ❤️ by Ved</span>
             </div>
           </div>
         </div>
