@@ -26,9 +26,10 @@ import {
   Grid3x3,
   List,
   Plus,
-  Rocket,
+  CheckCircle,
   Search,
-  Trello,
+  ListChecks,
+  Clock,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -115,96 +116,72 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <Card className="border-purple-300 border-2">
-            <CardContent className="p-4 sm:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
+          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm font-medium text-gray-600">
-                    Total Boards
+                    Total Tasks
                   </p>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">
                     {boards.length}
                   </p>
                 </div>
                 <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Trello className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+                  <ListChecks className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
                 </div>
               </div>
-            </CardContent>
-          </Card>
-          <Card className="border-purple-300 border-2">
-            <CardContent className="p-4 sm:p-6">
+            </div>
+          </div>
+          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm font-medium text-gray-600">
-                    Active Projects
+                    Tasks Completed
                   </p>
                   <p className="text-xl sm:text-2xl font-bold text-gray-900">
                     {boards.length}
                   </p>
                 </div>
                 <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Rocket className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
                 </div>
               </div>
-            </CardContent>
-          </Card>
-          <Card className="border-purple-300 border-2">
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm font-medium text-gray-500">
-                    Recent Activity
-                  </p>
-                  <p className="text-xl sm:text-2xl font-bold text-purple-700">
-                    {
-                      boards.filter((board) => {
-                        const updatedAt = new Date(board.updated_at);
-                        const oneWeekAgo = new Date();
-                        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-                        return updatedAt > oneWeekAgo;
-                      }).length
-                    }
-                  </p>
-                </div>
-                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  📊
-                </div>
+            </div>
+          </div>
+          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl p-4 sm:p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">
+                  Tasks Due Soon
+                </p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">
+                  {boards.length}
+                </p>
               </div>
-            </CardContent>
-          </Card>
-          <Card className="border-purple-300 border-2">
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm font-medium text-gray-600">
-                    Total Boards
-                  </p>
-                  <p className="text-xl sm:text-2xl font-bold text-gray-900">
-                    {boards.length}
-                  </p>
-                </div>
-                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Trello className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
-                </div>
+              <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Boards */}
         <div className="mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-4 sm:space-y-0">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                Your Boards
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                Your <span className="text-purple-500">Boards</span>
               </h2>
-              <p className="text-gray-600">Manage your projects and tasks</p>
+              <p className="text-purple-600 px-1">
+                Manage your projects and tasks in one place.
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <div className="flex items-center space-x-2 rounded bg-white border p-1">
+              {/* <div className="flex items-center space-x-2 rounded bg-white border p-1">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="sm"
@@ -219,30 +196,34 @@ export default function DashboardPage() {
                 >
                   <List />
                 </Button>
-              </div>
+              </div> */}
 
               <Button
-                variant="outline"
-                size="sm"
+                variant="ghost"
+                size="lg"
+                className="border-2 bg-gray-50 border-purple-300 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
                 onClick={() => setIsFilterOpen(true)}
               >
-                <Filter />
-                Filter
+                <Filter /> Filter
               </Button>
 
-              <Button onClick={handleCreateBoard}>
-                <Plus />
-                Create Board
+              <Button
+                onClick={handleCreateBoard}
+                size="lg"
+                className="bg-purple-500 hover:bg-purple-600"
+              >
+                <Plus strokeWidth={3} />
+                Create
               </Button>
             </div>
           </div>
-          {/* Search Bar */}
+
           <div className="relative mb-4 sm:mb-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-500" />
             <Input
               id="search"
               placeholder="Search boards..."
-              className="pl-10"
+              className="pl-10 border-2 border-purple-300 bg-gray-50 font-semibold text-purple-500 placeholder:text-purple-500 placeholder:font-normal focus-visible:ring-purple-200 focus-visible:border-purple-300"
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
               }
