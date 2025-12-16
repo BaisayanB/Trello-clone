@@ -96,7 +96,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-radial from-white to-purple-100">
+    <div className="bg-fixed min-h-screen bg-radial from-white to-purple-100">
       <Navbar />
 
       <main className="container mx-auto px-4 py-6 sm:py-8">
@@ -114,7 +114,7 @@ export default function DashboardPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
-          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl">
+          <div className="border-purple-300 bg-white/60 border rounded-2xl hover:shadow-lg hover:shadow-purple-100 hover:border-purple-400 transition-colors">
             <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -131,7 +131,7 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl">
+          <div className="border-purple-300 bg-white/60 border rounded-2xl hover:shadow-lg hover:shadow-purple-100 hover:border-purple-400 transition-colors">
             <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -148,18 +148,20 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-          <div className="border-purple-300 border-2 bg-gray-50 rounded-2xl p-4 sm:p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs sm:text-sm font-medium text-gray-600">
-                  Tasks Due Soon
-                </p>
-                <p className="text-xl sm:text-2xl font-bold text-gray-900">
-                  {boards.length}
-                </p>
-              </div>
-              <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+          <div className="border-purple-300 bg-white/60 border rounded-2xl hover:shadow-lg hover:shadow-purple-100 hover:border-purple-400 transition-colors">
+            <div className="p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm font-medium text-gray-600">
+                    Tasks Due Soon
+                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">
+                    {boards.length}
+                  </p>
+                </div>
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+                </div>
               </div>
             </div>
           </div>
@@ -178,27 +180,10 @@ export default function DashboardPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              {/* <div className="flex items-center space-x-2 rounded bg-white border p-1">
-                <Button
-                  variant={viewMode === "grid" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                >
-                  <Grid3x3 />
-                </Button>
-                <Button
-                  variant={viewMode === "list" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                >
-                  <List />
-                </Button>
-              </div> */}
-
               <Button
                 variant="ghost"
                 size="lg"
-                className="border-2 bg-gray-50 border-purple-300 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                className="border border-purple-300 text-purple-500 bg-white hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
                 onClick={() => setIsFilterOpen(true)}
               >
                 <Filter /> Filter
@@ -220,44 +205,49 @@ export default function DashboardPage() {
             <Input
               id="search"
               placeholder="Search boards..."
-              className="pl-10 border-2 border-purple-300 bg-gray-50 font-semibold text-purple-500 placeholder:text-purple-500 placeholder:font-normal focus-visible:ring-purple-200 focus-visible:border-purple-300"
+              className="pl-10 border border-purple-300 bg-white font-semibold text-purple-500 placeholder:text-purple-500 placeholder:font-normal focus-visible:ring-purple-200 focus-visible:border-purple-300"
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
               }
             />
           </div>
 
-          {/* Boards Grid/List */}
+          {/* All Boards display */}
           {boards.length === 0 ? (
-            <div>No boards yet</div>
+            <div className="px-1 text-purple-600">No boards yet</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
               {filteredBoards.map((board, key) => (
                 <Link href={`/boards/${board.id}`} key={key}>
-                  <Card className="hover:shadow-lg hover:shadow-purple-200 transition-shadow cursor-pointer group border-2 border-purple-300">
-                    <CardHeader className="pb-2">
+                  <Card className="h-full hover:shadow-lg hover:shadow-purple-200 transition-shadow cursor-pointer group border border-purple-300 hover:border-purple-400">
+                    <CardHeader className="">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                           <div className={`w-4 h-4 ${board.color} rounded`} />
-                          <CardTitle className="text-base sm:text-lg text-purple-600 truncate">
+                          <CardTitle className="text-lg sm:text-xl text-purple-600 truncate">
                             {board.title}
                           </CardTitle>
                         </div>
-                        <Button variant="ghost" size="sm" className="shrink-0 rounded-full hover:bg-purple-100">
-                          <MoreVertical className="text-purple-600"/>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="shrink-0 rounded-full hover:bg-purple-100"
+                        >
+                          <MoreVertical className="text-purple-600" />
                         </Button>
                       </div>
                     </CardHeader>
                     <CardContent className="p-4 sm:p-6">
-                      <CardDescription className="text-md mb-4 line-clamp-2 text-purple-500">
-                        {board.description}
+                      <CardDescription className="text-md mb-4 line-clamp-2 min-h-12">
+                        {board.description?.trim()
+                          ? board.description
+                          : "No description"}
                       </CardDescription>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500 space-y-1 sm:space-y-0">
-                        <span>12 Tasks • 5 Completed</span>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500 space-y-1 sm:space-y-0">
+                      <div className="flex flex-row items-center justify-between text-sm text-gray-600">
+                        <span>12 Tasks</span>
                         <span>
-                          Updated {new Date(board.updated_at).toLocaleDateString()}
+                          Updated at:{" "}
+                          {new Date(board.updated_at).toLocaleDateString()}
                         </span>
                       </div>
                     </CardContent>
@@ -265,11 +255,11 @@ export default function DashboardPage() {
                 </Link>
               ))}
 
-              <Card className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors cursor-pointer group">
-                <CardContent className="p-4 sm:p-6 flex flex-col items-center justify-center h-full min-h-[200px]">
-                  <Plus className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 group-hover:text-blue-600 mb-2" />
-                  <p className="text-sm sm:text-base text-gray-600 group-hover:text-blue-600 font-medium">
-                    Create new board
+              <Card className="border border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-200 transition-colors cursor-pointer group">
+                <CardContent className="p-4 sm:p-6 flex flex-col items-center justify-center h-full">
+                  <Plus className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 mb-2" />
+                  <p className="text-sm sm:text-base text-purple-600 font-medium">
+                    Create New Board
                   </p>
                 </CardContent>
               </Card>
