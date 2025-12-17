@@ -17,6 +17,7 @@ import {
   ArrowRight,
   Medal,
 } from "lucide-react";
+import Link from "next/link";
 import { Logo } from "@/components/logo";
 import Navbar from "@/components/navbar";
 
@@ -74,13 +75,13 @@ export default function HomePage() {
             organized, focused, and ahead.
           </p>
 
-          {!isSignedIn && (
+          {!isSignedIn ? (
             <div className="flex flex-row gap-4 justify-center">
               <a href="#features">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="text-lg border-2 text-semibold border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                  className="text-lg border-2 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
                 >
                   Explore Features
                 </Button>
@@ -94,6 +95,27 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </SignUpButton>
+            </div>
+          ) : (
+            <div className="flex flex-row gap-4 justify-center">
+              <a href="#features">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-lg border-2 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                >
+                  Explore Features
+                </Button>
+              </a>
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  className="text-lg px-8 bg-purple-500 hover:bg-purple-600"
+                >
+                  Go to DashBoard
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           )}
         </div>
@@ -114,7 +136,7 @@ export default function HomePage() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="border-0 shadow-lg hover:shadow-xl transition-shadow"
+              className="border-0 shadow-lg hover:shadow-xl gap-6 transition-shadow"
             >
               <CardHeader className="text-center">
                 <div className="mx-auto w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
