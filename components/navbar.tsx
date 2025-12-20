@@ -55,7 +55,7 @@ export default function Navbar({
   if (isBoardPage) {
     return (
       <header className="border-b border-purple-200 bg-white/70 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-3">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4 min-w-0">
               <Link
@@ -82,7 +82,7 @@ export default function Navbar({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-7 w-7 shrink-0 p-0 hover:bg-purple-100"
+                      className="h-7 w-7 shrink-0 hover:bg-purple-100"
                       onClick={onEditBoard}
                     >
                       <MoreHorizontal className="text-purple-600" />
@@ -97,7 +97,7 @@ export default function Navbar({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={`text-sm border-2 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600 ${
+                  className={`border-2 border-purple-500 text-purple-500 hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600 ${
                     filterCount > 0 ? "bg-purple-100" : ""
                   }`}
                   onClick={onFilterClick}

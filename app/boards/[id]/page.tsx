@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,7 +23,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useBoard } from "@/lib/hooks/useBoards";
 import { ColumnWithTasks, Task } from "@/lib/supabase/models";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Calendar, MoreHorizontal, Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -63,44 +63,47 @@ function DroppableColumn({
     <div
       ref={setNodeRef}
       className={`w-full lg:shrink-0 lg:w-80 ${
-        isOver ? "bg-blue-50 rounded-lg" : ""
+        isOver ? "bg-purple-100 rounded-lg" : ""
       }`}
     >
       <div
-        className={`bg-white rounded-lg shadow-sm border ${
-          isOver ? "ring-2 ring-blue-300" : ""
+        className={`bg-white rounded-lg shadow-md shadow-purple-200 border border-purple-300 ${
+          isOver ? "ring-2 ring-purple-300" : ""
         }`}
       >
         {/* Column Header */}
-        <div className="p-3 sm:p-4 border-b">
+        <div className="p-4 border-b border-purple-300 shadow-sm shadow-purple-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base truncate">
+              <h3 className="font-semibold text-purple-600 text-sm sm:text-base truncate">
                 {column.title}
               </h3>
-              <Badge variant="secondary" className="text-xs shrink-0">
+              <Badge
+                variant="secondary"
+                className="text-xs text-purple-600 bg-purple-100 shrink-0"
+              >
                 {column.tasks.length}
               </Badge>
             </div>
             <Button
               variant="ghost"
               size="sm"
-              className="shrink-0"
+              className="shrink-0 hover:bg-purple-100"
               onClick={() => onEditColumn(column)}
             >
-              <MoreHorizontal />
+              <MoreHorizontal className="text-purple-600" />
             </Button>
           </div>
         </div>
 
         {/* column content */}
-        <div className="p-2">
+        <div className="p-3">
           {children}
           <Dialog>
             <DialogTrigger asChild>
               <Button
                 variant="ghost"
-                className="w-full mt-3 text-gray-500 hover:text-gray-700"
+                className="w-full mt-3 text-purple-500 hover:bg-purple-100 hover:text-purple-600"
               >
                 <Plus />
                 Add Task
@@ -121,6 +124,7 @@ function DroppableColumn({
                     placeholder="Enter task title"
                   />
                 </div>
+
                 <div className="space-y-2">
                   <Label>Description</Label>
                   <Textarea
@@ -130,6 +134,7 @@ function DroppableColumn({
                     rows={3}
                   />
                 </div>
+
                 <div className="space-y-2">
                   <Label>Priority</Label>
                   <Select name="priority" defaultValue="medium">
@@ -176,7 +181,7 @@ function SortableTask({ task }: { task: Task }) {
   const styles = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0.3 : 1,
   };
 
   function getPriorityColor(priority: "low" | "medium" | "high"): string {
@@ -194,7 +199,7 @@ function SortableTask({ task }: { task: Task }) {
 
   return (
     <div ref={setNodeRef} style={styles} {...listeners} {...attributes}>
-      <Card className="cursor-pointer hover:shadow-md transition-shadow">
+      <Card className="cursor-pointer hover:shadow-md  transition-shadow">
         <CardContent className="p-3 sm:p-4">
           <div className="space-y-2 sm:space-y-3">
             {/* Task Header */}
@@ -687,15 +692,15 @@ export default function BoardPage() {
         {/* Board Content */}
         <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
           {/* Stats */}
-          <div className="flex mb-6 space-y-4 sm:space-y-0">
+          <div className="flex flex-col justify-between mb-6 space-y-4 sm:space-y-0">
             <div className="flex items-center justify-between gap-6">
-              <div className="text-sm text-gray-600">
+              <div className="text-md text-purple-600">
                 <span className="font-medium">Total Tasks: </span>
                 {columns.reduce((sum, col) => sum + col.tasks.length, 0)}
               </div>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button className="w-auto">
+                  <Button size="sm" className="w-auto bg-purple-500 hover:bg-purple-600">
                     <Plus />
                     Add Task
                   </Button>
