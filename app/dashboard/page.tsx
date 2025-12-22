@@ -243,8 +243,7 @@ export default function DashboardPage() {
                           ? board.description
                           : "No description"}
                       </CardDescription>
-                      <div className="flex flex-row items-center justify-between text-sm text-gray-600">
-                        <span>Total Tasks: </span>
+                      <div className="flex text-sm text-gray-600">
                         <span>
                           Updated at:{" "}
                           {new Date(board.updated_at).toLocaleDateString()}

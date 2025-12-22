@@ -8,10 +8,6 @@ export interface Board {
   updated_at: string;
 }
 
-export type BoardWithTaskCount = Board & {
-  taskCount: number;
-};
-
 export interface Column {
   id: string;
   board_id: string;

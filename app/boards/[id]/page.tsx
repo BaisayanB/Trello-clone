@@ -45,7 +45,6 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-
 function DroppableColumn({
   column,
   children,
@@ -58,7 +57,7 @@ function DroppableColumn({
   onEditColumn: (column: ColumnWithTasks) => void;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: column.id });
-  
+
   return (
     <div
       ref={setNodeRef}
@@ -691,6 +690,24 @@ export default function BoardPage() {
 
         {/* Board Content */}
         <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
+          {/* Stats and add column button */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">Total Tasks: </span>
+                {columns.reduce((sum, col) => sum + col.tasks.length, 0)}
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              className=""
+              onClick={() => setIsCreatingColumn(true)}
+            >
+              <Plus />
+              <span className="font-semibold">Add new List</span>
+            </Button>
+          </div>
+
           {/* Board Columns */}
           <DndContext
             sensors={sensors}
@@ -723,17 +740,6 @@ export default function BoardPage() {
                   </SortableContext>
                 </DroppableColumn>
               ))}
-
-              <div className="w-full md:max-w-xl md:mx-auto lg:shrink-0 lg:w-80">
-                <Button
-                  variant="outline"
-                  className="w-full h-fit py-6 shadow-lg shadow-purple-200 transition-colors text-white hover:text-white bg-purple-300 hover:bg-purple-400"
-                  onClick={() => setIsCreatingColumn(true)}
-                >
-                  <Plus />
-                  Add another List
-                </Button>
-              </div>
 
               <DragOverlay>
                 {activeTask ? <TaskOverlay task={activeTask} /> : null}
