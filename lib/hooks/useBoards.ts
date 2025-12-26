@@ -16,7 +16,7 @@ export function useBoards() {
   const { user } = useUser();
   const { supabase } = useSupabase();
   const [boards, setBoards] = useState<Board[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -99,7 +99,6 @@ export function useBoards() {
 export function useBoard(boardId: string) { 
   const { supabase } = useSupabase();
   const { user } = useUser();
-
   const [board, setBoard] = useState<Board | null>(null);
   const [columns, setColumns] = useState<ColumnWithTasks[]>([]);
   const [loading, setLoading] = useState(true);
@@ -130,7 +129,14 @@ export function useBoard(boardId: string) {
     }
   }, [boardId, supabase]);
 
-  async function updateBoard(boardId: string, updates: Partial<Board>) {
+  async function updateBoard(
+    boardId: string,
+    updates: {
+      title?: string;
+      description?: string;
+      color?: string;
+    }
+  ) {
     try {
       const updatedBoard = await boardService.updateBoard(
         supabase!,

@@ -26,7 +26,7 @@ import { useState } from "react";
 
 export default function DashboardPage() {
   const { user } = useUser();
-  const { createBoard, updateBoard, deleteBoard, boards, error } = useBoards();
+  const { createBoard, updateBoard, deleteBoard, boards, loading, error } = useBoards();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [activeBoard, setActiveBoard] = useState<Board | null>(null);
@@ -132,13 +132,15 @@ export default function DashboardPage() {
     setActiveBoard(null);
   };
 
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       Loading boards...
-  //     </div>
-  //   )
-  // }
+  if (loading && boards.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-purple-50">
+        <div className="text-purple-600 text-xl font-medium">
+          Loading boards...
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -154,7 +156,6 @@ export default function DashboardPage() {
       <Navbar />
 
       <main className="container mx-auto px-4 py-6">
-        {/* Boards */}
         <div className="mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-4 sm:space-y-0">
             <div>
@@ -191,7 +192,6 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Search box */}
           <div className="relative mb-4 sm:mb-6">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-500" />
             <Input
@@ -204,7 +204,6 @@ export default function DashboardPage() {
             />
           </div>
 
-          {/* All Boards display */}
           {boards.length === 0 ? (
             <div className="px-1 text-purple-600">No boards yet</div>
           ) : (
@@ -249,7 +248,6 @@ export default function DashboardPage() {
                 </Link>
               ))}
 
-              {/* Create new board card */}
               <Card
                 onClick={() => setIsCreateOpen(true)}
                 className="border border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-200 transition-colors cursor-pointer group"
@@ -266,7 +264,6 @@ export default function DashboardPage() {
         </div>
       </main>
 
-      {/* Edit n delete boards dialog */}
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
         <DialogContent className="w-[95vw] max-w-[425px] mx-auto border-2 border-purple-300 bg-purple-50 [&>button]:text-purple-600 [&>button:hover]:text-purple-700 [&>button:hover]:bg-purple-100 [&>button]:rounded-md">
           <DialogHeader>
@@ -357,7 +354,6 @@ export default function DashboardPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Filter Dialog */}
       <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
         <DialogContent className="w-[95vw] max-w-[425px] mx-auto border-2 border-purple-300 bg-purple-50 [&>button]:text-purple-600 [&>button:hover]:text-purple-700 [&>button:hover]:bg-purple-100 [&>button]:rounded-md">
           <DialogHeader>
@@ -444,7 +440,6 @@ export default function DashboardPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Board Dialog */}
       <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
         <DialogContent className="w-[95vw] max-w-[425px] mx-auto border-2 border-purple-300 bg-purple-50 [&>button]:text-purple-600 [&>button:hover]:text-purple-700 [&>button:hover]:bg-purple-100 [&>button]:rounded-md">
           <DialogHeader>
