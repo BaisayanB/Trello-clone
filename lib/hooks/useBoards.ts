@@ -22,7 +22,6 @@ export function useBoards() {
   useEffect(() => {
     async function loadBoards() {
       if (!user) return;
-
       try {
         setLoading(true);
         setError(null);
@@ -34,10 +33,7 @@ export function useBoards() {
         setLoading(false);
       }
     }
-
-    if (user) {
-      loadBoards();
-    }
+    loadBoards();
   }, [user, supabase]);
 
   async function createBoard(boardData: {
@@ -48,6 +44,7 @@ export function useBoards() {
     if (!user) throw new Error("User not authenticated");
 
     try {
+      setError(null);
       const newBoard = await boardDataService.createBoardWithDefaultColumns(
         supabase!,
         {
@@ -61,7 +58,40 @@ export function useBoards() {
     }
   }
 
-  return { boards, loading, error, createBoard };
+  async function updateBoard(
+    boardId: string,
+    updates: {
+      title?: string;
+      description?: string;
+      color?: string;
+    }
+  ) {
+    try {
+      setError(null);
+      const updatedBoard = await boardService.updateBoard(
+        supabase!,
+        boardId,
+        updates
+      );
+      setBoards((prev) =>
+        prev.map((board) => (board.id === boardId ? updatedBoard : board))
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update board.");
+    }
+  }
+
+  async function deleteBoard(boardId: string) {
+    try {
+      setError(null);
+      setBoards((prev) => prev.filter((b) => b.id !== boardId));
+      await boardService.deleteBoard(supabase!, boardId);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete board.");
+    }
+  }
+
+  return { boards, loading, error, createBoard, updateBoard, deleteBoard };
 }
 
 

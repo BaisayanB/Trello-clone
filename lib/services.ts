@@ -44,7 +44,11 @@ export const boardService = {
   async updateBoard(
     supabase: SupabaseClient,
     boardId: string,
-    updates: Partial<Board>
+    updates: {
+      title?: string;
+      description?: string;
+      color?: string;
+    }
   ): Promise<Board> {
     const { data, error } = await supabase
       .from("boards")
@@ -55,6 +59,15 @@ export const boardService = {
 
     if (error) throw error;
     return data;
+  },
+
+  async deleteBoard(supabase: SupabaseClient, boardId: string): Promise<void> {
+    const { error } = await supabase
+    .from("boards")
+    .delete()
+    .eq("id", boardId);
+
+    if (error) throw error;
   },
 };
 
