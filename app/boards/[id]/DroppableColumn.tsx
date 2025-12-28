@@ -160,7 +160,7 @@ export default function DroppableColumn({
                   />
                 </div>
 
-                <div className="flex justify-end pt-4">
+                <div className="flex flex-col sm:flex-row justify-end">
                   <Button
                     type="submit"
                     className="bg-purple-500 hover:bg-purple-600"

@@ -126,6 +126,22 @@ export default function BoardPage() {
     await createTask(columnId, taskData);
   }
 
+  async function handleUpdateTask(
+    taskId: string,
+    updates: {
+      title?: string;
+      description?: string | null;
+      priority?: "low" | "medium" | "high";
+      dueDate?: string | null;
+    }
+  ) {
+    await updateTask(taskId, updates);
+  }
+
+  async function handleDeleteTask(taskId: string) {
+    await deleteTask(taskId);
+  }  
+
   function handleDragStart(event: DragStartEvent) {
     const taskId = event.active.id as string;
     const task = columns
@@ -227,7 +243,7 @@ export default function BoardPage() {
     setEditingColumn(null);
     setEditingColumnTitle("");
   }
-  
+
   function handleEditColumn(column: ColumnWithTasks) {
     setIsEditingColumn(true);
     setEditingColumn(column);
@@ -237,15 +253,12 @@ export default function BoardPage() {
   const filteredColumns = columns.map((column) => ({
     ...column,
     tasks: column.tasks.filter((task) => {
-      // Filter by priority
       if (
         filters.priority.length > 0 &&
         !filters.priority.includes(task.priority)
       ) {
         return false;
       }
-
-      // Filter by due date
       if (filters.dueDate && task.due_date) {
         const taskDate = new Date(task.due_date).toDateString();
         const filterDate = new Date(filters.dueDate).toDateString();
@@ -254,7 +267,6 @@ export default function BoardPage() {
           return false;
         }
       }
-
       return true;
     }),
   }));
@@ -278,7 +290,6 @@ export default function BoardPage() {
 
         {/* Board Content */}
         <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
-          {/* Stats and add column button */}
           <div className="flex flex-row items-center justify-between mb-6">
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <div className="text-sm text-purple-600">
@@ -286,6 +297,7 @@ export default function BoardPage() {
                 {columns.reduce((sum, col) => sum + col.tasks.length, 0)}
               </div>
             </div>
+
             <Button
               variant="ghost"
               size="sm"
@@ -322,7 +334,12 @@ export default function BoardPage() {
                   >
                     <div className="space-y-4">
                       {column.tasks.map((task) => (
-                        <SortableTask task={task} key={task.id} />
+                        <SortableTask
+                          task={task}
+                          key={task.id}
+                          onUpdateTask={handleUpdateTask}
+                          onDeleteTask={handleDeleteTask}
+                        />
                       ))}
                     </div>
                   </SortableContext>
@@ -359,7 +376,7 @@ export default function BoardPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
@@ -439,7 +456,7 @@ export default function BoardPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
@@ -482,7 +499,7 @@ export default function BoardPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
               <Button
                 type="button"
                 onClick={() => setIsCreatingColumn(false)}
@@ -524,7 +541,7 @@ export default function BoardPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-between gap-2">
               <Button
                 type="button"
                 variant="destructive"
@@ -532,7 +549,7 @@ export default function BoardPage() {
               >
                 Delete Column
               </Button>
-              
+
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
                   type="button"

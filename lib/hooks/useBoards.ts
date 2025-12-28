@@ -94,7 +94,6 @@ export function useBoards() {
   return { boards, loading, error, createBoard, updateBoard, deleteBoard };
 }
 
-// Fetches single board and deals with columns, tasks and internal stuffs used in boards page
 export function useBoard(boardId: string) {
   const { supabase } = useSupabase();
   const { user } = useUser();
@@ -241,13 +240,13 @@ export function useBoard(boardId: string) {
       dueDate?: string | null;
       priority?: "low" | "medium" | "high";
     }
-  ) {
+  ): Promise<Task | undefined> {
     try {
       const updatedTask = await taskService.updateTask(supabase!, taskId, {
         title: updates.title,
         description: updates.description ?? null,
-        due_date: updates.dueDate ?? null,
         priority: updates.priority,
+        due_date: updates.dueDate ?? null,
       });
 
       setColumns((prev) =>

@@ -331,7 +331,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-between gap-2">
               <Button
                 variant="destructive"
                 type="button"
@@ -342,10 +342,10 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   type="button"
                   onClick={() => setIsEditOpen(false)}
-                  className="border border-purple-300 text-purple-500 bg-white hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                  className="border-purple-300 text-purple-500 bg-white hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
                 >
                   Cancel
                 </Button>
@@ -431,7 +431,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
@@ -526,7 +526,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
