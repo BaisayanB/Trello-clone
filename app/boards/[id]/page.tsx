@@ -339,6 +339,9 @@ export default function BoardPage() {
     reorderTask,
     moveTask,
     updateColumn,
+    updateTask,
+    deleteColumn,
+    deleteTask,
   } = useBoard(id);
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -509,6 +512,16 @@ export default function BoardPage() {
     setEditingColumn(null);
   }
 
+  async function handleDeleteColumn() {
+    if (!editingColumn) return;
+
+    await deleteColumn(editingColumn.id);
+
+    setIsEditingColumn(false);
+    setEditingColumn(null);
+    setEditingColumnTitle("");
+  }
+  
   function handleEditColumn(column: ColumnWithTasks) {
     setIsEditingColumn(true);
     setEditingColumn(column);
@@ -805,25 +818,35 @@ export default function BoardPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-end pt-4 gap-2">
+            <div className="flex flex-col sm:flex-row justify-between pt-4 gap-2">
               <Button
                 type="button"
-                onClick={() => {
-                  setIsEditingColumn(false);
-                  setEditingColumnTitle("");
-                  setEditingColumn(null);
-                }}
-                variant="ghost"
-                className="border border-purple-300 text-purple-500 bg-white hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                variant="destructive"
+                onClick={handleDeleteColumn}
               >
-                Cancel
+                Delete Column
               </Button>
-              <Button
-                type="submit"
-                className="bg-purple-500 hover:bg-purple-600"
-              >
-                Edit Column
-              </Button>
+              
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setIsEditingColumn(false);
+                    setEditingColumnTitle("");
+                    setEditingColumn(null);
+                  }}
+                  variant="ghost"
+                  className="border border-purple-300 text-purple-500 bg-white hover:bg-purple-100 hover:border-purple-600 hover:text-purple-600"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="bg-purple-500 hover:bg-purple-600"
+                >
+                  Edit Column
+                </Button>
+              </div>
             </div>
           </form>
         </DialogContent>
