@@ -83,7 +83,7 @@ export default function SortableTask({
     <>
       <div
         ref={setNodeRef}
-        style={{ ...styles, touchAction: "none" }}
+        style={styles}
         {...listeners}
         {...attributes}
       >
