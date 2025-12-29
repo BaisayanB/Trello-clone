@@ -79,8 +79,8 @@ export default function BoardPage() {
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 250,
-        tolerance: 5,
+        delay: 750,
+        tolerance: 10,
       },
     })
   );
