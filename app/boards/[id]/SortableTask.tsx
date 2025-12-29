@@ -81,7 +81,12 @@ export default function SortableTask({
 
   return (
     <>
-      <div ref={setNodeRef} style={styles} {...listeners} {...attributes}>
+      <div
+        ref={setNodeRef}
+        style={{ ...styles, touchAction: "none" }}
+        {...listeners}
+        {...attributes}
+      >
         <Card className="cursor-pointer border-purple-300 hover:shadow-lg hover:shadow-purple-200 transition-shadow">
           <CardContent className="p-4">
             <div className="space-y-3">

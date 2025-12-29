@@ -241,16 +241,16 @@ export default function HomePage() {
       </section>
 
       <footer className="py-3 border-t border-purple-200 bg-white/70">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex items-center gap-6 justify-between">
+            <div className="flex items-center space-x-2">
               <Logo className="h-6 w-6 text-purple-500" />
               <span className="text-xl font-bold">
                 Task<span className="text-purple-500">Flow</span>
               </span>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-purple-700">
-              <span>© 2025 TaskFlow. All rights reserved.</span>
+            <div className="flex items-center gap-4 text-center text-sm text-purple-700">
+              <span>© 2025 TaskFlow.</span>
               <span>Built with ❤️ by Ved</span>
             </div>
           </div>

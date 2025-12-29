@@ -22,6 +22,7 @@ import {
   DragOverlay,
   DragStartEvent,
   PointerSensor,
+  TouchSensor,
   rectIntersection,
   useSensor,
   useSensors,
@@ -74,6 +75,12 @@ export default function BoardPage() {
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 12,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
       },
     })
   );

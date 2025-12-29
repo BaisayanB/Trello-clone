@@ -138,7 +138,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-purple-50">
         <div className="text-purple-600 text-xl font-medium">
-          Loading boards...
+          Loading your dashboard...
         </div>
       </div>
     );
