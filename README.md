@@ -2,9 +2,9 @@
 
 A modern Kanban-style task management application focused on speed, clarity, and real-world usability. It helps individuals organize work visually without unnecessary complexity.
 
-![](screenshots/1.png) ![](screenshots/2.png)
-
-![](screenshots/3.png) ![](screenshots/4.png)
+| ![](screenshots/1.png) | ![](screenshots/2.png) |
+|------------------------|------------------------|
+| ![](screenshots/3.png) | ![](screenshots/4.png) |
 
 ## Live Demo & Links
 
