@@ -249,7 +249,7 @@ export default function HomePage() {
                 Task<span className="text-purple-500">Flow</span>
               </span>
             </div>
-            <div className="flex items-center gap-4 text-center text-sm text-purple-700">
+            <div className="flex items-center gap-2 md:gap-4 text-center text-sm text-purple-700">
               <span>© 2025 TaskFlow.</span>
               <span>Built with ❤️ by Ved</span>
             </div>
